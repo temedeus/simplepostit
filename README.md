@@ -15,7 +15,7 @@ Project created using Spring Boot and Spring Data REST for backend and React for
 1. build with maven
     1. command line: mvn clean -f pom.xml
     1. (build should download necessary tools to build React-side as well)
-1 Run either of the two
+1. Run either of the two
     1. npm run build (to just build the project)
     1. npm run watch (to build and watch for changes)
 1. Run SimplePostitApplication
