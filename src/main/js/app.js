@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PostItGrid from "./PostItGrid";
+import PostItGrid from "./component/PostItGrid";
+import store from './store';
+import { Provider } from 'react-redux'
 
 /**
  * Simple Post IT main client-side application
@@ -12,10 +14,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Provider store={store}>
         <h1>Simple Post-it Application</h1>
         <PostItGrid />
-      </div>
+      </Provider>
     );
   }
 }

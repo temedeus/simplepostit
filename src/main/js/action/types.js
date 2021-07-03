@@ -1,0 +1,4 @@
+export const SAVE_POSTIT = 'SAVE_POSTIT'
+export const EDIT_POSTIT = 'EDIT_POSTIT'
+export const DELETE_POSTIT = 'DELETE_POSTIT'
+export const GET_ALL_POSTIT = 'GET_POSTIT'
