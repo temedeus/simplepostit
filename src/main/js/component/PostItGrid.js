@@ -28,7 +28,7 @@ class PostItGrid extends React.Component {
       <PostIt
         key={postIt._links.self.href}
         content={postIt.content}
-        save={() => this.props.editPostIt(postIt._links.self.href)}
+        save={(content) => this.props.editPostIt(postIt._links.self.href, content)}
         delete={() => this.props.deletePostIt(postIt._links.self.href)}
       />
     ));
@@ -69,7 +69,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = (dispatch) => {
   return {
     savePostIt: (content) => dispatch(savePostIt(content)),
-    editPostit: (link, content) => dispatch(editPostit(link, content)),
+    editPostIt: (link, content) => dispatch(editPostit(link, content)),
     deletePostIt: (link) => dispatch(deletePostit(link)),
     getAllPostit: () => dispatch(getAllPostit()),
   }

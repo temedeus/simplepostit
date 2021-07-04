@@ -1,7 +1,9 @@
-import { SAVE_POSTIT, EDIT_POSTIT, DELETE_POSTIT, GET_ALL_POSTIT } from './types'
+import { SAVE_POSTIT_SUCCESS, EDIT_POSTIT_SUCCESS, DELETE_POSTIT_SUCCESS, FETCH_POSTITS_SUCCESS } from './types'
 import { API_ROOT_URL } from "../util/apiconfig";
+import rest from 'rest';
 
-export const savePostIt = async () => {
+export const savePostIt = (content) => {
+    console.log("content", content)
     return (dispatch) => fetch(API_ROOT_URL + "postIts", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -12,41 +14,38 @@ export const savePostIt = async () => {
         .then(response => response.json())
         .then(data => {
             dispatch({
-                type: SAVE_POSTIT,
-                payload: {
-                    isLoaded: true,
-                    postIts: [...this.state.postIts, data]
-                }
+                type: SAVE_POSTIT_SUCCESS,
+                payload: data
             })
-
-            error => {
-                alert("Something went wrong saving post-it.");
-            };
         });
 }
 
-export const editPostit = async (link, content) => {
+export const editPostit = (link, content) => {
     return (dispatch) => fetch(link, {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             content
         })
-    }).then(response => {
-        error => {
-            alert("Something went wrong editing post-it.");
-        };
-    });
+    })
+        .then(res => res.json())
+        .then(
+            response => {
+                dispatch({
+                    type: EDIT_POSTIT_SUCCESS,
+                    payload: response
+                })
+            });
 }
 
-export const deletePostit = async (link) => {
+export const deletePostit = (link) => {
     return (dispatch) => fetch(link, {
         method: "delete"
     }).then(res => {
-        dispatch(getAllPostit())
-        error => {
-            alert("Something went wrong deleting post-it.");
-        };
+        dispatch({
+            type: DELETE_POSTIT_SUCCESS,
+            payload: { link }
+        })
     });
 }
 
@@ -56,9 +55,8 @@ export const getAllPostit = () => {
             .then(res => res.json())
             .then(
                 response => {
-                    console.log("perkele")
                     dispatch({
-                        type: GET_ALL_POSTIT,
+                        type: FETCH_POSTITS_SUCCESS,
                         payload: response._embedded.postIts
                     })
                 },

@@ -1,4 +1,4 @@
-import { DELETE_POSTIT, EDIT_POSTIT, GET_ALL_POSTIT, SAVE_POSTIT } from "../action/types"
+import { DELETE_POSTIT_SUCCESS, EDIT_POSTIT_SUCCESS, FETCH_POSTITS_SUCCESS, SAVE_POSTIT_SUCCESS } from "../action/types"
 
 const initialState = {
     isLoaded: false,
@@ -7,28 +7,32 @@ const initialState = {
 
 // Use the initialState as a default value
 export default function postitReducer(state = initialState, action) {
-    //console.log("action", action)
     switch (action.type) {
-        case SAVE_POSTIT:
+        case SAVE_POSTIT_SUCCESS:
             return {
                 ...state,
                 isLoaded: true,
-                postIts: [...this.state.postIts, action.payload]
+                postIts: [...state.postIts, action.payload]
             }
 
-        case EDIT_POSTIT:
+        case EDIT_POSTIT_SUCCESS:
+            const editedPostIts = state.postIts.map(postIt => {
+                return postIt._links.self.href == action.payload._links.self.href ? action.payload : postIt
+            })
             return {
                 ...state,
                 isLoaded: true,
-                postIts: [action.payload]
+                postIts: editedPostIts
             }
 
-        case DELETE_POSTIT:
+        case DELETE_POSTIT_SUCCESS:
+            const filteredPostIts = state.postIts.filter(postIt => postIt._links.self.href != action.payload.link)
             return {
                 ...state,
+                postIts: filteredPostIts
             }
 
-        case GET_ALL_POSTIT:
+        case FETCH_POSTITS_SUCCESS:
             return {
                 ...state,
                 isLoaded: true,
