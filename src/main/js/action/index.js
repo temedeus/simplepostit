@@ -1,9 +1,7 @@
 import { SAVE_POSTIT_SUCCESS, EDIT_POSTIT_SUCCESS, DELETE_POSTIT_SUCCESS, FETCH_POSTITS_SUCCESS } from './types'
 import { API_ROOT_URL } from "../util/apiconfig";
-import rest from 'rest';
 
 export const savePostIt = (content) => {
-    console.log("content", content)
     return (dispatch) => fetch(API_ROOT_URL + "postIts", {
         method: "post",
         headers: { "Content-Type": "application/json" },
