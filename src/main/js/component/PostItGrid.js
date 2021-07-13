@@ -60,7 +60,8 @@ class PostItGrid extends React.Component {
 const mapStateToProps = function (state) {
   return {
     isLoaded: state.postit.isLoaded,
-    postIts: state.postit.postIts
+    postIts: state.postit.postIts,
+    error: state.postit.error
   }
 }
 
