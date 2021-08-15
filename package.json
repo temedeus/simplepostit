@@ -31,10 +31,21 @@
     "@babel/preset-react": "^7.14.5",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "jest": "^27.0.6",
     "jest-fetch-mock": "^3.0.3",
     "redux-mock-store": "^1.5.4",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.5.0"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "./src/setupTests.js"
+    ]
   }
 }

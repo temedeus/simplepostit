@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddPostIt should render AddPostIt 1`] = `
+<div
+  className="add-postit-wrapper"
+>
+  <button
+    className="add-postit"
+    onClick={[MockFunction]}
+  >
+    Add
+  </button>
+</div>
+`;
